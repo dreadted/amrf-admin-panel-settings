@@ -21,5 +21,6 @@ class Bootstrap
         new SeoOutput();
         new Favicons();
         new SettingShortcode();
+        new ContactLinkShortcodes();
     }
 }
