@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
  * Class Repository
  *
  * Storage/defaults/sanitization for the behavior-changing hardening toggles
- * (see Provider). Defaults to true for all four — opt-out, not opt-in.
+ * (see Provider). Defaults to true for all five — opt-out, not opt-in.
  *
  * @package Antropomorf\Hardening
  */
@@ -24,6 +24,7 @@ class Repository
   public static function getDefaults(): array
   {
     return [
+      'allow_svg_uploads' => true,
       'disable_author_archives' => true,
       'redirect_404_to_home' => true,
       'remove_jquery_migrate' => true,

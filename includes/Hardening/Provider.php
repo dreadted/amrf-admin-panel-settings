@@ -15,12 +15,13 @@ if (!defined('ABSPATH')) {
  *   the WP version generator tag and RSD link, blocking ?username= at
  *   login, and removing the /wp/v2/users REST endpoint. Near-universal,
  *   no downside.
- * - Toggleable, on the "Hardening" page (manage_options): disabling author
- *   archives (and, tied to that same toggle, WP's own users sitemap —
- *   pointless and actively leaks usernames once author archives are
- *   gone), redirecting 404s to the homepage, removing jQuery Migrate,
- *   and disabling generated image sizes — these change behavior some sites
- *   rely on, so each defaults to true but stays a per-site opt-out.
+ * - Toggleable, on the "Hardening" page (manage_options): allowing admins
+ *   to upload sanitized SVGs, disabling author archives (and, tied to that
+ *   same toggle, WP's own users sitemap — pointless and actively leaks
+ *   usernames once author archives are gone), redirecting 404s to the
+ *   homepage, removing jQuery Migrate, and disabling generated image
+ *   sizes — these change behavior some sites rely on, so each defaults to
+ *   true but stays a per-site opt-out.
  *
  * @package Antropomorf\Hardening
  */
@@ -66,6 +67,12 @@ class Provider
   {
     $settings = Repository::getSettings();
 
+    if ($settings['allow_svg_uploads']) {
+      add_filter('upload_mimes', [$this, 'allowSvgMimeType']);
+      add_filter('wp_check_filetype_and_ext', [$this, 'checkSvgFiletype'], 10, 4);
+      add_filter('wp_handle_upload_prefilter', [$this, 'sanitizeUploadedSvg']);
+    }
+
     if ($settings['disable_author_archives']) {
       add_action('template_redirect', [$this, 'disableAuthorArchives']);
       // A users sitemap only ever points at author archives — pointless,
@@ -86,6 +93,127 @@ class Provider
       add_action('intermediate_image_sizes_advanced', fn () => []);
       add_filter('big_image_size_threshold', '__return_false');
     }
+  }
+
+  /**
+   * SVGs can carry <script>, event-handler attributes, and external
+   * references — treated as active content, not a plain image format, so
+   * this whole feature is gated to administrators (manage_options) and
+   * every uploaded file is sanitized before WordPress stores it.
+   * Deliberately not `unfiltered_html`: on a non-multisite install
+   * WordPress grants that capability to Editors too by default, so it
+   * doesn't actually distinguish admin from editor.
+   *
+   * @param array $mimes
+   * @return array
+   */
+  public function allowSvgMimeType(array $mimes): array
+  {
+    if (current_user_can('manage_options')) {
+      $mimes['svg'] = 'image/svg+xml';
+    }
+    return $mimes;
+  }
+
+  /**
+   * @param array|false $data
+   * @param string $file
+   * @param string $filename
+   * @param array $mimes
+   * @return array|false
+   */
+  public function checkSvgFiletype($data, $file, $filename, $mimes)
+  {
+    if (!empty($data['ext']) && !empty($data['type'])) {
+      return $data;
+    }
+
+    $filetype = wp_check_filetype($filename, $mimes);
+    if ($filetype['ext'] === 'svg') {
+      $data['ext'] = 'svg';
+      $data['type'] = 'image/svg+xml';
+    }
+
+    return $data;
+  }
+
+  /**
+   * @param array $file
+   * @return array
+   */
+  public function sanitizeUploadedSvg(array $file): array
+  {
+    $is_svg = $file['type'] === 'image/svg+xml' || preg_match('/\.svg$/i', $file['name'] ?? '');
+
+    if (!$is_svg) {
+      return $file;
+    }
+
+    if (!current_user_can('manage_options')) {
+      $file['error'] = __('You are not allowed to upload SVG files.', 'amrf-admin');
+      return $file;
+    }
+
+    $content = file_get_contents($file['tmp_name']);
+
+    if ($content === false || stripos($content, '<svg') === false) {
+      $file['error'] = __('This file does not look like a valid SVG.', 'amrf-admin');
+      return $file;
+    }
+
+    $sanitized = $this->sanitizeSvgMarkup($content);
+
+    if ($sanitized === null) {
+      $file['error'] = __('This SVG could not be sanitized and was rejected.', 'amrf-admin');
+      return $file;
+    }
+
+    file_put_contents($file['tmp_name'], $sanitized);
+
+    return $file;
+  }
+
+  /**
+   * Strips executable/active content from an SVG's markup: <script>,
+   * event-handler attributes (onload, onclick, …), javascript: URIs, and
+   * <foreignObject> (arbitrary embedded HTML). Returns null if the file
+   * isn't parseable XML at all.
+   *
+   * @param string $content
+   * @return string|null
+   */
+  private function sanitizeSvgMarkup(string $content): ?string
+  {
+    $previous = libxml_use_internal_errors(true);
+    $doc = new \DOMDocument();
+    $loaded = $doc->loadXML($content, LIBXML_NONET | LIBXML_NOENT);
+    libxml_clear_errors();
+    libxml_use_internal_errors($previous);
+
+    if (!$loaded) {
+      return null;
+    }
+
+    $xpath = new \DOMXPath($doc);
+
+    foreach (iterator_to_array($xpath->query('//*[local-name()="script"] | //*[local-name()="foreignObject"]')) as $node) {
+      $node->parentNode->removeChild($node);
+    }
+
+    foreach (iterator_to_array($xpath->query('//@*')) as $attr) {
+      $name = strtolower($attr->nodeName);
+      $value = trim($attr->nodeValue);
+
+      $is_event_handler = str_starts_with($name, 'on');
+      $is_script_uri = ($name === 'href' || $name === 'xlink:href' || $name === 'src')
+        && preg_match('/^\s*javascript:/i', $value);
+
+      if ($is_event_handler || $is_script_uri) {
+        $attr->ownerElement->removeAttributeNode($attr);
+      }
+    }
+
+    return $doc->saveXML();
   }
 
   /**
@@ -208,6 +336,10 @@ class Provider
     add_settings_section('hardening_section', '', '__return_false', self::PAGE_SLUG);
 
     $fields = [
+      'allow_svg_uploads' => [
+        __('Allow SVG uploads', 'amrf-admin'),
+        __('Lets administrators upload SVG files through the Media Library — every file is sanitized (scripts, event handlers, and embedded HTML stripped) before it\'s stored.', 'amrf-admin'),
+      ],
       'disable_author_archives' => [
         __('Disable author archives', 'amrf-admin'),
         __('Redirects author archive pages to the homepage — mainly useful on single-author sites, or to avoid leaking usernames via author URLs.', 'amrf-admin'),
