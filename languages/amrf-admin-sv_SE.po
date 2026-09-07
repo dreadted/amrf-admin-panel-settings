@@ -589,3 +589,15 @@ msgstr "Du har inte behörighet att ändra den här inställningen."
 #: includes/Swish/FrontendProvider.php:66
 msgid "Copied!"
 msgstr "Kopierat!"
+
+#: includes/ContactForm/RetentionShortcode.php:37
+msgid "until further notice"
+msgstr "tills vidare"
+
+#. translators: %d: number of days
+#: includes/ContactForm/RetentionShortcode.php:42
+#, php-format
+msgid "for up to %d day"
+msgid_plural "for up to %d days"
+msgstr[0] "i högst %d dag"
+msgstr[1] "i högst %d dagar"

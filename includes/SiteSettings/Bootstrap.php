@@ -20,5 +20,6 @@ class Bootstrap
         new Provider();
         new SeoOutput();
         new Favicons();
+        new SettingShortcode();
     }
 }
