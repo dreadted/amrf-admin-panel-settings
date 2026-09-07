@@ -16,6 +16,24 @@ function canRunSwish() {
 	return false;
 }
 
+function setupCopyOnClick(button, value) {
+	let resetTimer;
+
+	button.addEventListener('click', () => {
+		if (!navigator.clipboard?.writeText) return;
+
+		navigator.clipboard.writeText(value).then(() => {
+			clearTimeout(resetTimer);
+			button.textContent = window.amrfSwish?.copiedLabel || value;
+			button.classList.add('is-copied');
+			resetTimer = setTimeout(() => {
+				button.textContent = value;
+				button.classList.remove('is-copied');
+			}, 1500);
+		});
+	});
+}
+
 function setupSwishLink(link) {
 	if (link.dataset.swishReady) return;
 	link.dataset.swishReady = 'true';
@@ -27,12 +45,29 @@ function setupSwishLink(link) {
 
 	if (!window.amrfSwish?.qrSrc) return;
 
+	const number = window.amrfSwish.qrAlt || '';
+
+	const wrap = document.createElement('div');
+	wrap.className = 'amrf-swish-qr-wrap';
+
 	const img = document.createElement('img');
 	img.src = window.amrfSwish.qrSrc;
-	img.alt = window.amrfSwish.qrAlt || '';
+	img.alt = number;
 	img.loading = 'lazy';
 	img.className = 'amrf-swish-qr';
-	link.replaceWith(img);
+	wrap.appendChild(img);
+
+	if (number) {
+		const numberButton = document.createElement('button');
+		numberButton.type = 'button';
+		numberButton.className = 'amrf-swish-qr-number';
+		numberButton.textContent = number;
+		numberButton.setAttribute('aria-live', 'polite');
+		setupCopyOnClick(numberButton, number);
+		wrap.appendChild(numberButton);
+	}
+
+	link.replaceWith(wrap);
 }
 
 document.querySelectorAll('a[href="#swish"]').forEach(setupSwishLink);

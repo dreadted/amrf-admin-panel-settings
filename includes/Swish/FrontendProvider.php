@@ -63,6 +63,7 @@ class FrontendProvider
       ),
       'qrSrc' => $settings['qr_url'],
       'qrAlt' => $settings['number'],
+      'copiedLabel' => __('Copied!', 'amrf-admin'),
     ]);
   }
 }
