@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-06T14:35:34+00:00\n"
+"POT-Creation-Date: 2026-09-07T11:21:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: amrf-admin\n"
@@ -50,16 +50,16 @@ msgstr ""
 msgid "Spam verification failed, please reload the page and try again."
 msgstr ""
 
-#: includes/ContactForm/Modal.php:98
+#: includes/ContactForm/Modal.php:125
 msgid "Contact"
 msgstr ""
 
-#: includes/ContactForm/Modal.php:99
+#: includes/ContactForm/Modal.php:126
 msgid "Close"
 msgstr ""
 
 #. translators: 1: opening <a> tag to the privacy policy (omitted if it isn't published yet), 2: closing </a> tag
-#: includes/ContactForm/Modal.php:111
+#: includes/ContactForm/Modal.php:138
 #, php-format
 msgid "We process your personal data to answer your message. Read more in our %1$sprivacy policy%2$s."
 msgstr ""
@@ -141,44 +141,44 @@ msgstr ""
 msgid "Forms"
 msgstr ""
 
-#: includes/Hardening/Provider.php:47
+#: includes/Hardening/Provider.php:49
 msgid "There is an error."
 msgstr ""
 
-#: includes/Hardening/Provider.php:160
-#: includes/Hardening/Provider.php:161
+#: includes/Hardening/Provider.php:181
+#: includes/Hardening/Provider.php:182
 msgid "Hardening"
 msgstr ""
 
-#: includes/Hardening/Provider.php:191
+#: includes/Hardening/Provider.php:212
 msgid "Disable author archives"
 msgstr ""
 
-#: includes/Hardening/Provider.php:192
+#: includes/Hardening/Provider.php:213
 msgid "Redirects author archive pages to the homepage — mainly useful on single-author sites, or to avoid leaking usernames via author URLs."
 msgstr ""
 
-#: includes/Hardening/Provider.php:195
+#: includes/Hardening/Provider.php:216
 msgid "Redirect 404 pages to the homepage"
 msgstr ""
 
-#: includes/Hardening/Provider.php:196
+#: includes/Hardening/Provider.php:217
 msgid "Applies to logged-out visitors only. Turn off if this site should show a real 404 page instead."
 msgstr ""
 
-#: includes/Hardening/Provider.php:199
+#: includes/Hardening/Provider.php:220
 msgid "Remove jQuery Migrate"
 msgstr ""
 
-#: includes/Hardening/Provider.php:200
+#: includes/Hardening/Provider.php:221
 msgid "Turn off if an older plugin or theme on this site depends on jQuery Migrate's compatibility shims."
 msgstr ""
 
-#: includes/Hardening/Provider.php:203
+#: includes/Hardening/Provider.php:224
 msgid "Disable generated image sizes"
 msgstr ""
 
-#: includes/Hardening/Provider.php:204
+#: includes/Hardening/Provider.php:225
 msgid "Stops WordPress from generating additional (responsive) image sizes and auto-scaling large uploads. Turn off if this site relies on WordPress's own generated image sizes."
 msgstr ""
 
@@ -186,13 +186,13 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Hooks/FrontendHooks.php:177
+#: includes/Hooks/FrontendHooks.php:181
 msgid "Page Editor"
 msgstr ""
 
 #. translators: %d is the number indicating minimum password length
-#: includes/Hooks/FrontendHooks.php:228
-#: includes/Hooks/FrontendHooks.php:260
+#: includes/Hooks/FrontendHooks.php:232
+#: includes/Hooks/FrontendHooks.php:264
 #, php-format
 msgid "ERROR: Password must be at least %d characters long."
 msgstr ""
@@ -511,6 +511,10 @@ msgstr ""
 
 #: includes/SupportGenix/Provider.php:474
 msgid "You are not authorized to edit this page."
+msgstr ""
+
+#: includes/Swish/FrontendProvider.php:66
+msgid "Copied!"
 msgstr ""
 
 #: includes/Swish/Provider.php:44

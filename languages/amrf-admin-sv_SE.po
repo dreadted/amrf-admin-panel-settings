@@ -46,16 +46,16 @@ msgstr ""
 msgid "Site Settings"
 msgstr "Webbplatsinställningar"
 
-#: includes/ContactForm/Modal.php:98
+#: includes/ContactForm/Modal.php:125
 msgid "Contact"
 msgstr "Kontakt"
 
-#: includes/ContactForm/Modal.php:99
+#: includes/ContactForm/Modal.php:126
 msgid "Close"
 msgstr "Stäng"
 
 #. translators: 1: opening <a> tag to the privacy policy (omitted if it isn't published yet), 2: closing </a> tag
-#: includes/ContactForm/Modal.php:111
+#: includes/ContactForm/Modal.php:138
 #, php-format
 msgid "We process your personal data to answer your message. Read more in our %1$sprivacy policy%2$s."
 msgstr "Vi behandlar dina personuppgifter för att kunna svara på ditt meddelande. Läs mer i vår %1$sintegritetspolicy%2$s."
@@ -123,44 +123,44 @@ msgstr "Tomt eller 0 = spara för alltid."
 msgid "Please enter a valid Swedish Personal Identity Number (YYMMDD-XXXX)."
 msgstr "Ange ett giltigt svenskt personnummer (ÅÅMMDD-XXXX)."
 
-#: includes/Hardening/Provider.php:47
+#: includes/Hardening/Provider.php:49
 msgid "There is an error."
 msgstr "Ett fel har uppstått."
 
-#: includes/Hardening/Provider.php:160
-#: includes/Hardening/Provider.php:161
+#: includes/Hardening/Provider.php:181
+#: includes/Hardening/Provider.php:182
 msgid "Hardening"
 msgstr "Härdning"
 
-#: includes/Hardening/Provider.php:191
+#: includes/Hardening/Provider.php:212
 msgid "Disable author archives"
 msgstr "Inaktivera författararkiv"
 
-#: includes/Hardening/Provider.php:192
+#: includes/Hardening/Provider.php:213
 msgid "Redirects author archive pages to the homepage — mainly useful on single-author sites, or to avoid leaking usernames via author URLs."
 msgstr "Omdirigerar författararkivsidor till startsidan — användbart på sajter med en enda författare, eller för att undvika att användarnamn läcker via författar-URL:er."
 
-#: includes/Hardening/Provider.php:195
+#: includes/Hardening/Provider.php:216
 msgid "Redirect 404 pages to the homepage"
 msgstr "Omdirigera 404-sidor till startsidan"
 
-#: includes/Hardening/Provider.php:196
+#: includes/Hardening/Provider.php:217
 msgid "Applies to logged-out visitors only. Turn off if this site should show a real 404 page instead."
 msgstr "Gäller bara utloggade besökare. Stäng av om sajten istället ska visa en riktig 404-sida."
 
-#: includes/Hardening/Provider.php:199
+#: includes/Hardening/Provider.php:220
 msgid "Remove jQuery Migrate"
 msgstr "Ta bort jQuery Migrate"
 
-#: includes/Hardening/Provider.php:200
+#: includes/Hardening/Provider.php:221
 msgid "Turn off if an older plugin or theme on this site depends on jQuery Migrate's compatibility shims."
 msgstr "Stäng av om ett äldre plugin eller tema på sajten är beroende av jQuery Migrates kompatibilitetslager."
 
-#: includes/Hardening/Provider.php:203
+#: includes/Hardening/Provider.php:224
 msgid "Disable generated image sizes"
 msgstr "Inaktivera genererade bildstorlekar"
 
-#: includes/Hardening/Provider.php:204
+#: includes/Hardening/Provider.php:225
 msgid "Stops WordPress from generating additional (responsive) image sizes and auto-scaling large uploads. Turn off if this site relies on WordPress's own generated image sizes."
 msgstr "Hindrar WordPress från att generera ytterligare (responsiva) bildstorlekar och automatiskt skala stora uppladdningar. Stäng av om sajten är beroende av WordPress egna genererade bildstorlekar."
 
@@ -168,13 +168,13 @@ msgstr "Hindrar WordPress från att generera ytterligare (responsiva) bildstorle
 msgid "Settings"
 msgstr "Inställningar"
 
-#: includes/Hooks/FrontendHooks.php:177
+#: includes/Hooks/FrontendHooks.php:181
 msgid "Page Editor"
 msgstr "Redigera sida"
 
 #. translators: %d is the number indicating minimum password length
-#: includes/Hooks/FrontendHooks.php:228
-#: includes/Hooks/FrontendHooks.php:260
+#: includes/Hooks/FrontendHooks.php:232
+#: includes/Hooks/FrontendHooks.php:264
 #, php-format
 msgid "ERROR: Password must be at least %d characters long."
 msgstr "FEL: Lösenordet måste bestå av minst %d tecken."
@@ -585,3 +585,7 @@ msgstr "Speglar inställningen \"Avskräck sökmotorer från att indexera den h�
 #: includes/SiteSettings/Provider.php:217
 msgid "You are not allowed to change this setting."
 msgstr "Du har inte behörighet att ändra den här inställningen."
+
+#: includes/Swish/FrontendProvider.php:66
+msgid "Copied!"
+msgstr "Kopierat!"
