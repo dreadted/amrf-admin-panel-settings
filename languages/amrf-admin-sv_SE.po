@@ -370,6 +370,7 @@ msgstr "Personnamn"
 msgid "Job title"
 msgstr "Titel"
 
+#: includes/SiteSettings/ContactLinkShortcodes.php:61
 #: includes/SiteSettings/Repository.php:47
 msgid "Email"
 msgstr "E-post"
@@ -586,6 +587,7 @@ msgstr "Speglar inställningen \"Avskräck sökmotorer från att indexera den h�
 msgid "You are not allowed to change this setting."
 msgstr "Du har inte behörighet att ändra den här inställningen."
 
+#: includes/SiteSettings/ContactLinkShortcodes.php:78
 #: includes/Swish/FrontendProvider.php:66
 msgid "Copied!"
 msgstr "Kopierat!"
