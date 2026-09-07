@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:       Admin Panel Settings
- * Description:       Customize admin panel settings for different user roles.
+ * Description:       General site settings — SEO, contact forms with GDPR tools, Swish payments, analytics, security hardening, and per-role admin panel control.
  * Version:         0.3.0
  * Requires at least: 5.6
  * Requires PHP:      8.1

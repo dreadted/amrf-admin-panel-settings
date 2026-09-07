@@ -7,4 +7,4 @@ Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Customize admin panel settings for different user roles.
+General site settings — SEO, contact forms with GDPR tools, Swish payments, analytics, security hardening, and per-role admin panel control.
