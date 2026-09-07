@@ -22,11 +22,6 @@ msgstr ""
 msgid "Admin Panel Settings"
 msgstr "Inställningar för Adminpanelen"
 
-#. Description of the plugin
-#: amrf-site-settings.php
-msgid "Customize admin panel settings for different user roles."
-msgstr "Ange panelinställningar för respektive användarroll."
-
 #. Author of the plugin
 #: amrf-site-settings.php
 msgid "Christofer Laurin"
@@ -123,44 +118,44 @@ msgstr "Tomt eller 0 = spara för alltid."
 msgid "Please enter a valid Swedish Personal Identity Number (YYMMDD-XXXX)."
 msgstr "Ange ett giltigt svenskt personnummer (ÅÅMMDD-XXXX)."
 
-#: includes/Hardening/Provider.php:49
+#: includes/Hardening/Provider.php:50
 msgid "There is an error."
 msgstr "Ett fel har uppstått."
 
-#: includes/Hardening/Provider.php:181
-#: includes/Hardening/Provider.php:182
+#: includes/Hardening/Provider.php:309
+#: includes/Hardening/Provider.php:310
 msgid "Hardening"
 msgstr "Härdning"
 
-#: includes/Hardening/Provider.php:212
+#: includes/Hardening/Provider.php:344
 msgid "Disable author archives"
 msgstr "Inaktivera författararkiv"
 
-#: includes/Hardening/Provider.php:213
+#: includes/Hardening/Provider.php:345
 msgid "Redirects author archive pages to the homepage — mainly useful on single-author sites, or to avoid leaking usernames via author URLs."
 msgstr "Omdirigerar författararkivsidor till startsidan — användbart på sajter med en enda författare, eller för att undvika att användarnamn läcker via författar-URL:er."
 
-#: includes/Hardening/Provider.php:216
+#: includes/Hardening/Provider.php:348
 msgid "Redirect 404 pages to the homepage"
 msgstr "Omdirigera 404-sidor till startsidan"
 
-#: includes/Hardening/Provider.php:217
+#: includes/Hardening/Provider.php:349
 msgid "Applies to logged-out visitors only. Turn off if this site should show a real 404 page instead."
 msgstr "Gäller bara utloggade besökare. Stäng av om sajten istället ska visa en riktig 404-sida."
 
-#: includes/Hardening/Provider.php:220
+#: includes/Hardening/Provider.php:352
 msgid "Remove jQuery Migrate"
 msgstr "Ta bort jQuery Migrate"
 
-#: includes/Hardening/Provider.php:221
+#: includes/Hardening/Provider.php:353
 msgid "Turn off if an older plugin or theme on this site depends on jQuery Migrate's compatibility shims."
 msgstr "Stäng av om ett äldre plugin eller tema på sajten är beroende av jQuery Migrates kompatibilitetslager."
 
-#: includes/Hardening/Provider.php:224
+#: includes/Hardening/Provider.php:356
 msgid "Disable generated image sizes"
 msgstr "Inaktivera genererade bildstorlekar"
 
-#: includes/Hardening/Provider.php:225
+#: includes/Hardening/Provider.php:357
 msgid "Stops WordPress from generating additional (responsive) image sizes and auto-scaling large uploads. Turn off if this site relies on WordPress's own generated image sizes."
 msgstr "Hindrar WordPress från att generera ytterligare (responsiva) bildstorlekar och automatiskt skala stora uppladdningar. Stäng av om sajten är beroende av WordPress egna genererade bildstorlekar."
 
@@ -603,3 +598,28 @@ msgid "for up to %d day"
 msgid_plural "for up to %d days"
 msgstr[0] "i högst %d dag"
 msgstr[1] "i högst %d dagar"
+
+#. Description of the plugin
+#: amrf-site-settings.php
+msgid "General site settings — SEO, contact forms with GDPR tools, Swish payments, analytics, security hardening, and per-role admin panel control."
+msgstr ""
+
+#: includes/Hardening/Provider.php:153
+msgid "You are not allowed to upload SVG files."
+msgstr "Du har inte behörighet att ladda upp SVG-filer."
+
+#: includes/Hardening/Provider.php:160
+msgid "This file does not look like a valid SVG."
+msgstr "Den här filen verkar inte vara en giltig SVG."
+
+#: includes/Hardening/Provider.php:167
+msgid "This SVG could not be sanitized and was rejected."
+msgstr "Den här SVG-filen kunde inte saneras och avvisades."
+
+#: includes/Hardening/Provider.php:340
+msgid "Allow SVG uploads"
+msgstr "Tillåt SVG-uppladdning"
+
+#: includes/Hardening/Provider.php:341
+msgid "Lets administrators upload SVG files through the Media Library — every file is sanitized (scripts, event handlers, and embedded HTML stripped) before it's stored."
+msgstr "Låter administratörer ladda upp SVG-filer via Mediabiblioteket — varje fil saneras (skript, händelsehanterare och inbäddad HTML tas bort) innan den sparas."
