@@ -57,7 +57,7 @@ class SiteSettingsMenu
       self::CAPABILITY,
       self::MENU_SLUG,
       [$this->renderer, 'render'],
-      'dashicons-admin-site-alt3',
+      'dashicons-admin-generic',
       80
     );
 
